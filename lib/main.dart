@@ -72,16 +72,22 @@ class _MyAppState extends State<MyHomePage> {
     ).toList();
   }
 
-  void _addNewTransaction(String newTitle, double newAmount) {
+  void _addNewTransaction(String newTitle, double newAmount, DateTime selectedDate) {
     final newTransaction = Transaction(
         id: DateTime.now().toString(),
         title: newTitle,
         amount: newAmount,
-        date: DateTime.now()
+        date: selectedDate
     );
 
     setState(() {
       return _userTransactions.add(newTransaction);
+    });
+  }
+
+  void _deleteTransaction(String id) {
+    setState(() {
+      _userTransactions.removeWhere((element) => element.id == id);
     });
   }
 
@@ -98,10 +104,6 @@ class _MyAppState extends State<MyHomePage> {
   }
 
   Widget build(BuildContext context) {
-    // print(
-    //
-    //   // DateFormat.E(DateTime.now().subtract(Duration(days: 1)))
-    // );
     return Scaffold(
         appBar: AppBar(
           title: Text('Expenser'),
@@ -124,7 +126,7 @@ class _MyAppState extends State<MyHomePage> {
               //   //   child: Text("Text placeholder!"),
               //   // ),
               // ),
-              TransactionList(_userTransactions),
+              TransactionList(_userTransactions, _deleteTransaction),
             ],
           ),
         ),

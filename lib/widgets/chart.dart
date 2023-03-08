@@ -42,7 +42,7 @@ class Chart extends StatelessWidget {
     print(groupedTransactionValues);
     return Container(
         // decoration: BoxDecoration(
-        //   // borderRadius: BorderRadius.circular(100)
+        //   shape: BoxShape.circle
         // ),
         child: Card(
           elevation: 8,

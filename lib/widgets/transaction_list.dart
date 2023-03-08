@@ -6,14 +6,14 @@ class TransactionList extends StatelessWidget {
   @override
 
   List<Transaction> userTransactions;
+  Function deleteTransaction;
 
-  TransactionList(this.userTransactions);
-
+  TransactionList(this.userTransactions, this.deleteTransaction);
 
   Widget build(BuildContext context) {
     return (
         Container(
-          height: 530,
+          height: 350,
           child: userTransactions.length == 0 ? Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
@@ -56,52 +56,13 @@ class TransactionList extends StatelessWidget {
                   subtitle: Text(
                     DateFormat.yMMMd().format(userTransactions[index].date)
                   ),
+                 trailing: IconButton(
+                   icon: Icon(Icons.delete),
+                   color: Theme.of(context).colorScheme.error,
+                   onPressed: () => deleteTransaction(userTransactions[index].id),
+                 ) ,
                 )
               );
-              // return Card(
-              //   elevation: 4,
-              //   child: Row(
-              //     children: <Widget>[
-              //       Container(
-              //         margin: EdgeInsets.symmetric(
-              //           vertical: 10,
-              //           horizontal: 15,
-              //         ),
-              //         padding: EdgeInsets.all(8),
-              //         decoration: BoxDecoration(
-              //           border: Border.all(
-              //             color: Theme.of(context).primaryColor,
-              //             width: 1,
-              //           ),
-              //         ),
-              //         child: Text(
-              //           '\$${userTransactions[index].amount.toStringAsFixed(2)}',
-              //           style: Theme.of(context).textTheme.titleLarge,
-              //         ),
-              //       ),
-              //       Column(
-              //         crossAxisAlignment: CrossAxisAlignment.start,
-              //         children: <Widget>[
-              //           Text(
-              //             userTransactions[index].title,
-              //             style: TextStyle(
-              //                 fontSize: 17,
-              //                 fontFamily: 'Quicksand',
-              //                 fontWeight: FontWeight.bold
-              //             ),
-              //           ),
-              //           Text(
-              //             DateFormat().format(userTransactions[index].date),
-              //             style: TextStyle(
-              //                 color: Colors.grey,
-              //                 fontSize: 13
-              //             ),
-              //           ),
-              //         ],
-              //       )
-              //     ],
-              //   ),
-              // );
             },
             itemCount: userTransactions.length,
         )
