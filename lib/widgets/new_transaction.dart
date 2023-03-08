@@ -81,66 +81,75 @@ class _NewTransactionState extends State<NewTransaction> {
   }
 
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 5,
-      child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 5),
-        padding: EdgeInsets.all(5),
-        decoration: BoxDecoration(),
-        child: Column(
-          children: <Widget>[
-            TextField(
-              controller: _titleController,
-              decoration: InputDecoration(
-                labelText: "Title",
-              ),
-              onSubmitted: (_) => _submitData(),
+    final mediaQuery = MediaQuery.of(context);
+
+    return SingleChildScrollView(
+        child: Card(
+          elevation: 5,
+          child: Container(
+            margin: EdgeInsets.symmetric(horizontal: 5),
+            padding: EdgeInsets.only(
+              top: 10,
+              left: 10,
+              right: 10,
+              bottom: mediaQuery.viewInsets.bottom + 10,
             ),
-            TextField(
-              controller: _amountController,
-              decoration: InputDecoration(
-                labelText: "Amount",
-              ),
-              keyboardType: TextInputType.number,
-              onSubmitted: (_) => _submitData(),
-            ),
-            Container(
-              height: 70,
-              margin: EdgeInsets.fromLTRB(0, 0, 0, 5),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  _selectedDate == null ? Text("No date chosen!")
-                  : Text(
-                    'Picked date: ${DateFormat.yMd().format(_selectedDate)}'
+            decoration: BoxDecoration(),
+            child: Column(
+              children: <Widget>[
+                TextField(
+                  controller: _titleController,
+                  decoration: InputDecoration(
+                    labelText: "Title",
                   ),
-                  TextButton(
-                    onPressed: _toggleDatePicker,
-                    child: Text(
-                      "Choose a date",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold
+                  onSubmitted: (_) => _submitData(),
+                ),
+                TextField(
+                  controller: _amountController,
+                  decoration: InputDecoration(
+                  labelText: "Amount",
+                ),
+                keyboardType: TextInputType.number,
+                onSubmitted: (_) => _submitData(),
+              ),
+              Container(
+                height: 70,
+                margin: EdgeInsets.fromLTRB(0, 0, 0, 5),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    _selectedDate == null ? Text("No date chosen!")
+                    : Text(
+                      'Picked date: ${DateFormat.yMd().format(_selectedDate)}'
+                    ),
+                    TextButton(
+                      onPressed: _toggleDatePicker,
+                      child: Text(
+                        "Choose a date",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: _submitData,
-                child: Text(
-                  "Submit",
-                  style: TextStyle(
-                      fontSize: 14
-                  ),
+                  ],
                 ),
               ),
-            )
-          ],
+              Container(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: _submitData,
+                  child: Text(
+                    "Submit",
+                    style: TextStyle(
+                        fontSize: 14
+                    ),
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
-      ),
+      )
     );
   }
 }
