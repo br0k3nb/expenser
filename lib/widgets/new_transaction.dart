@@ -77,8 +77,6 @@ class _NewTransactionState extends State<NewTransaction> {
       setState(() {
         _selectedDate = date;
       });
-
-      print(date);
     });
   }
 

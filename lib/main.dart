@@ -18,7 +18,6 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Quicksand',
         textTheme: ThemeData.light().textTheme.copyWith(
           titleLarge: TextStyle(
-            // color: Colors.purple,
             fontFamily: 'Quicksand',
             fontWeight: FontWeight.bold,
             fontSize: 18
@@ -37,8 +36,6 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  // String titleInput;
-  // String amountInput;
   @override
   State<StatefulWidget> createState() => _MyAppState();
 }
@@ -46,20 +43,7 @@ class MyHomePage extends StatefulWidget {
 class _MyAppState extends State<MyHomePage> {
   @override
 
-  final List<Transaction> _userTransactions = [
-    // Transaction(
-    //   id: "teste",
-    //   title: "New shoes",
-    //   amount: 89.99,
-    //   date: DateTime.now(),
-    // ),
-    // Transaction(
-    //   id: "anotherTeste",
-    //   title: "New teste",
-    //   amount: 99.99,
-    //   date: DateTime.now(),
-    // ),
-  ];
+  final List<Transaction> _userTransactions = [];
 
   List<Transaction> get _recentTransactions {
     return _userTransactions.where((element) {
@@ -119,13 +103,6 @@ class _MyAppState extends State<MyHomePage> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Chart(_recentTransactions),
-              // Container(
-              //   width: double.infinity,
-              //   // child: Card(
-              //   //   elevation: 3,
-              //   //   child: Text("Text placeholder!"),
-              //   // ),
-              // ),
               TransactionList(_userTransactions, _deleteTransaction),
             ],
           ),
